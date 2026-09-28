@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elite Sports Arena - Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .bg-mesh-pattern {
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(14, 165, 233, 0.08) 0px, transparent 50%);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 bg-mesh-pattern text-slate-900 min-h-screen flex flex-col">
+  
+  <header class="border-b border-slate-200 bg-white/95 backdrop-blur-md sticky top-0 z-30 py-4 px-8 flex justify-between items-center shadow-sm">
+    <div class="flex items-center space-x-3">
+      <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold shadow-md shadow-emerald-600/20 text-lg">
+        🏆
+      </div>
+      <div>
+        <h1 class="text-2xl font-extrabold tracking-wide text-slate-900">ELITE SPORTS ARENA</h1>
+        <p class="text-xs text-slate-500">Select an arena discipline to book or manage operations</p>
+      </div>
+    </div>
+    
+    <div class="flex items-center space-x-3">
+      <div id="user-pill" class="text-xs bg-slate-100 border border-slate-200 text-slate-800 px-3.5 py-1.5 rounded-xl font-bold flex items-center space-x-1.5">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse"></span>
+        <span id="session-username">User</span>
+      </div>
+      <button onclick="logout()" class="text-xs bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 px-3 py-1.5 rounded-xl font-bold transition-all">
+        Logout
+      </button>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-6 py-10 flex-1 w-full">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+      <!-- 1. Box Cricket -->
+      <a href="cricket.html" class="group bg-white border border-slate-200 hover:border-emerald-500 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col">
+        <div class="relative h-44 overflow-hidden bg-slate-900">
+          <img src="https://images.pexels.com/photos/3628912/pexels-photo-3628912.jpeg?auto=compress&cs=tinysrgb&w=800" 
+               referrerpolicy="no-referrer"
+               alt="Box Cricket" 
+               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90">
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
+          <span class="absolute top-3 right-3 text-[11px] font-extrabold text-amber-900 bg-amber-100/95 backdrop-blur-sm border border-amber-300 px-2.5 py-0.5 rounded-full shadow-sm">Floodlit Cage</span>
+        </div>
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <h2 class="text-xl font-extrabold text-slate-900 group-hover:text-emerald-700 transition-colors">🏏 Box Cricket</h2>
+            <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">High-tension netting, bowling machines & automated cage practice pitches.</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center text-sm font-bold text-emerald-700">
+            <span>₹1,200 <span class="text-xs text-slate-400 font-normal">/ hr</span></span>
+            <span class="group-hover:translate-x-1 transition-transform">Book Pitch →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 2. Football Turf -->
+      <a href="football.html" class="group bg-white border border-slate-200 hover:border-emerald-500 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col">
+        <div class="relative h-44 overflow-hidden bg-slate-900">
+          <img src="https://images.pexels.com/photos/46798/the-ball-stadion-football-the-pitch-46798.jpeg?auto=compress&cs=tinysrgb&w=800" 
+               referrerpolicy="no-referrer"
+               alt="Football Turf" 
+               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90">
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
+          <span class="absolute top-3 right-3 text-[11px] font-extrabold text-emerald-900 bg-emerald-100/95 backdrop-blur-sm border border-emerald-300 px-2.5 py-0.5 rounded-full shadow-sm">FIFA Standard</span>
+        </div>
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <h2 class="text-xl font-extrabold text-slate-900 group-hover:text-emerald-700 transition-colors">⚽ Football Turf</h2>
+            <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">5v5 and 7v7 artificial grass floodlit arena with digital scoreboard.</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center text-sm font-bold text-emerald-700">
+            <span>₹1,500 <span class="text-xs text-slate-400 font-normal">/ hr</span></span>
+            <span class="group-hover:translate-x-1 transition-transform">Book Turf →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 3. Badminton (Guaranteed Embedded Badminton Court Artwork) -->
+      <a href="badminton.html" class="group bg-white border border-slate-200 hover:border-emerald-500 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col">
+        <div class="relative h-44 overflow-hidden bg-gradient-to-tr from-teal-950 via-emerald-900 to-cyan-900 flex items-center justify-center">
+          
+          <!-- Embedded High-Resolution Badminton Visual Graphic -->
+          <svg class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" viewBox="0 0 500 250" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#022c22"/>
+                <stop offset="50%" stop-color="#064e3b"/>
+                <stop offset="100%" stop-color="#0f766e"/>
+              </linearGradient>
+              <linearGradient id="racketGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#38bdf8"/>
+                <stop offset="100%" stop-color="#0284c7"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Court Base & Perspective Lines -->
+            <rect width="500" height="250" fill="url(#bgGrad)"/>
+            <path d="M 0,220 L 500,220" stroke="#10b981" stroke-width="4" opacity="0.6"/>
+            <path d="M 50,220 L 150,50 L 350,50 L 450,220" stroke="#34d399" stroke-width="2" opacity="0.3" fill="none"/>
+            <line x1="250" y1="50" x2="250" y2="220" stroke="#34d399" stroke-width="2.5" opacity="0.4"/>
+            <line x1="120" y1="135" x2="380" y2="135" stroke="#34d399" stroke-width="1.5" opacity="0.3"/>
+
+            <!-- Badminton Net -->
+            <rect x="60" y="90" width="380" height="40" fill="#0f172a" opacity="0.35"/>
+            <line x1="50" y1="90" x2="450" y2="90" stroke="#ffffff" stroke-width="2" opacity="0.8"/>
+            <line x1="50" y1="130" x2="450" y2="130" stroke="#ffffff" stroke-width="1" opacity="0.5"/>
+            
+            <!-- Badminton Racket -->
+            <g transform="translate(190, 45) rotate(-25)">
+              <ellipse cx="60" cy="50" rx="35" ry="46" fill="none" stroke="url(#racketGrad)" stroke-width="5"/>
+              <!-- Strings Grid -->
+              <line x1="38" y1="20" x2="38" y2="80" stroke="#93c5fd" stroke-width="1" opacity="0.5"/>
+              <line x1="49" y1="10" x2="49" y2="90" stroke="#93c5fd" stroke-width="1" opacity="0.5"/>
+              <line x1="60" y1="5" x2="60" y2="95" stroke="#93c5fd" stroke-width="1" opacity="0.5"/>
+              <line x1="71" y1="10" x2="71" y2="90" stroke="#93c5fd" stroke-width="1" opacity="0.5"/>
+              <line x1="82" y1="20" x2="82" y2="80" stroke="#93c5fd" stroke-width="1" opacity="0.5"/>
+              <line x1="30" y1="35" x2="90" y2="35" stroke="#93c5fd" stroke-width="1" opacity="0.5"/>
+              <line x1="26" y1="50" x2="94" y2="50" stroke="#93c5fd" stroke-width="1" opacity="0.5"/>
+              <line x1="30" y1="65" x2="90" y2="65" stroke="#93c5fd" stroke-width="1" opacity="0.5"/>
+              <!-- Shaft and Handle -->
+              <rect x="58" y="96" width="4" height="65" fill="#38bdf8"/>
+              <rect x="56" y="161" width="8" height="35" rx="3" fill="#f8fafc"/>
+            </g>
+
+            <!-- Shuttlecock -->
+            <g transform="translate(290, 75) rotate(40)">
+              <path d="M 0,0 L 22,-24 L 32,-14 Z" fill="#ffffff" opacity="0.95"/>
+              <path d="M 0,0 L 28,-14 L 34,-2 Z" fill="#e2e8f0" opacity="0.9"/>
+              <path d="M 0,0 L 32,-2 L 30,12 Z" fill="#cbd5e1" opacity="0.8"/>
+              <!-- Shuttlecock Cork Base -->
+              <circle cx="0" cy="0" r="8" fill="#f59e0b"/>
+            </g>
+          </svg>
+
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-transparent to-transparent pointer-events-none"></div>
+          <span class="absolute top-3 right-3 text-[11px] font-extrabold text-cyan-900 bg-cyan-100/95 backdrop-blur-sm border border-cyan-300 px-2.5 py-0.5 rounded-full shadow-sm">BWF Standard</span>
+        </div>
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <h2 class="text-xl font-extrabold text-slate-900 group-hover:text-emerald-700 transition-colors">🏸 Badminton</h2>
+            <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Indoor air-conditioned synthetic rubber & teak wooden spring courts.</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center text-sm font-bold text-emerald-700">
+            <span>₹500 <span class="text-xs text-slate-400 font-normal">/ hr</span></span>
+            <span class="group-hover:translate-x-1 transition-transform">Book Court →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 4. Swimming -->
+      <a href="swimming.html" class="group bg-white border border-slate-200 hover:border-emerald-500 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col">
+        <div class="relative h-44 overflow-hidden bg-slate-900">
+          <img src="https://images.pexels.com/photos/863988/pexels-photo-863988.jpeg?auto=compress&cs=tinysrgb&w=800" 
+               referrerpolicy="no-referrer"
+               alt="Swimming Pool" 
+               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90">
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
+          <span class="absolute top-3 right-3 text-[11px] font-extrabold text-blue-900 bg-blue-100/95 backdrop-blur-sm border border-blue-300 px-2.5 py-0.5 rounded-full shadow-sm">Olympic 50M</span>
+        </div>
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <h2 class="text-xl font-extrabold text-slate-900 group-hover:text-emerald-700 transition-colors">🏊 Swimming Pool</h2>
+            <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Olympic standard 8-lane temperature-regulated pool with certified coaches.</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center text-sm font-bold text-emerald-700">
+            <span>₹350 <span class="text-xs text-slate-400 font-normal">/ hr</span></span>
+            <span class="group-hover:translate-x-1 transition-transform">Book Lane →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 5. Chess -->
+      <a href="chess.html" class="group bg-white border border-slate-200 hover:border-emerald-500 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col">
+        <div class="relative h-44 overflow-hidden bg-slate-900">
+          <img src="https://images.pexels.com/photos/260024/pexels-photo-260024.jpeg?auto=compress&cs=tinysrgb&w=800" 
+               referrerpolicy="no-referrer"
+               alt="Chess Lounge" 
+               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90">
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
+          <span class="absolute top-3 right-3 text-[11px] font-extrabold text-purple-900 bg-purple-100/95 backdrop-blur-sm border border-purple-300 px-2.5 py-0.5 rounded-full shadow-sm">FIDE Rated</span>
+        </div>
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <h2 class="text-xl font-extrabold text-slate-900 group-hover:text-emerald-700 transition-colors">♟️ Chess Lounge</h2>
+            <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Quiet tournament lounge with DGT electronic sensor boards & clocks.</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center text-sm font-bold text-emerald-700">
+            <span>₹200 <span class="text-xs text-slate-400 font-normal">/ hr</span></span>
+            <span class="group-hover:translate-x-1 transition-transform">Book Table →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 6. Carrom -->
+      <a href="carrom.html" class="group bg-white border border-slate-200 hover:border-emerald-500 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col">
+        <div class="relative h-44 overflow-hidden bg-slate-900">
+          <img src="https://images.pexels.com/photos/1040157/pexels-photo-1040157.jpeg?auto=compress&cs=tinysrgb&w=800" 
+               referrerpolicy="no-referrer"
+               alt="Carrom Arena" 
+               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90">
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
+          <span class="absolute top-3 right-3 text-[11px] font-extrabold text-rose-900 bg-rose-100/95 backdrop-blur-sm border border-rose-300 px-2.5 py-0.5 rounded-full shadow-sm">Champion Boards</span>
+        </div>
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <h2 class="text-xl font-extrabold text-slate-900 group-hover:text-emerald-700 transition-colors">🎯 Carrom Arena</h2>
+            <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">English birch ply waterproof championship boards with focus arena spotlights.</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center text-sm font-bold text-emerald-700">
+            <span>₹150 <span class="text-xs text-slate-400 font-normal">/ hr</span></span>
+            <span class="group-hover:translate-x-1 transition-transform">Book Board →</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </main>
+
+  <script>
+    const AUTH_KEY = "elite_auth_session";
+    const session = JSON.parse(localStorage.getItem(AUTH_KEY) || "null");
+
+    if (!session || !session.name) {
+      window.location.replace("login.html");
+    } else {
+      document.getElementById("session-username").innerText = `${session.role === 'ADMIN' ? '🛡️ Admin' : '👤 Player'}: ${session.name}`;
+    }
+
+    function logout() {
+      localStorage.removeItem(AUTH_KEY);
+      window.location.replace("login.html");
+    }
+  </script>
+</body>
+</html>

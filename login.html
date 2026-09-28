@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Elite Sports Arena</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Teko:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .title-font { font-family: 'Teko', sans-serif; }
+    
+    /* Clean Bright Athletic Facility Background Pattern */
+    .pro-canvas-bg {
+      background-color: #f8fafc;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.09) 0px, transparent 40%),
+        radial-gradient(at 100% 0%, rgba(14, 165, 233, 0.08) 0px, transparent 40%),
+        radial-gradient(at 50% 100%, rgba(241, 245, 249, 1) 0px, #f8fafc 100%);
+    }
+
+    /* Subtle architectural court grid */
+    .arena-grid {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+    }
+
+    .badge-Confirmed { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+    .badge-Pending { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
+    .badge-Cancelled { background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; }
+  </style>
+</head>
+<body class="pro-canvas-bg text-slate-800 min-h-screen flex flex-col justify-center items-center p-4 sm:p-6 relative overflow-x-hidden">
+  
+  <!-- Architectural Grid Layer -->
+  <div class="fixed inset-0 arena-grid pointer-events-none z-0"></div>
+
+  <!-- Soft Ambient Glow Orbs -->
+  <div class="fixed -top-32 -left-32 w-96 h-96 bg-emerald-200/50 rounded-full blur-[100px] pointer-events-none"></div>
+  <div class="fixed -bottom-32 -right-32 w-96 h-96 bg-sky-200/50 rounded-full blur-[100px] pointer-events-none"></div>
+
+  <!-- ========================================== -->
+  <!-- 1. SPLIT PRO PORTAL CONTAINER              -->
+  <!-- ========================================== -->
+  <div id="login-container" class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-12 rounded-3xl overflow-hidden shadow-xl border border-slate-200/90 relative z-10 bg-white">
+    
+    <!-- LEFT PANEL: Facility Branding & Discipline Showcase -->
+    <div class="md:col-span-5 p-8 lg:p-10 flex flex-col justify-between border-b md:border-b-0 md:border-r border-slate-200 bg-slate-50/75">
+      <div>
+        <!-- Verified Facility Tag -->
+        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-100/80 border border-emerald-300 text-emerald-800 text-[11px] font-bold tracking-wider uppercase mb-5">
+          <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+          <span>Verified Arena Gateway</span>
+        </div>
+
+        <h1 class="title-font text-4xl sm:text-5xl uppercase tracking-wider text-slate-900 leading-none">
+          ELITE SPORTS <span class="text-emerald-600">ARENA</span>
+        </h1>
+        <p class="text-slate-500 text-xs mt-2.5 leading-relaxed">
+          Centralized reservation portal for indoor courts, floodlit turf grounds, and competitive analytics.
+        </p>
+
+        <!-- Discipline Grid Badges -->
+        <div class="grid grid-cols-3 gap-2 mt-6">
+          <div class="p-2.5 rounded-xl bg-white border border-slate-200/80 shadow-xs text-center">
+            <div class="text-base">🏏</div>
+            <div class="text-[10px] font-extrabold text-slate-700 mt-0.5">Box Cricket</div>
+          </div>
+          <div class="p-2.5 rounded-xl bg-white border border-slate-200/80 shadow-xs text-center">
+            <div class="text-base">⚽</div>
+            <div class="text-[10px] font-extrabold text-slate-700 mt-0.5">FIFA Turf</div>
+          </div>
+          <div class="p-2.5 rounded-xl bg-white border border-slate-200/80 shadow-xs text-center">
+            <div class="text-base">🏸</div>
+            <div class="text-[10px] font-extrabold text-slate-700 mt-0.5">Badminton</div>
+          </div>
+          <div class="p-2.5 rounded-xl bg-white border border-slate-200/80 shadow-xs text-center">
+            <div class="text-base">🏊</div>
+            <div class="text-[10px] font-extrabold text-slate-700 mt-0.5">50M Pool</div>
+          </div>
+          <div class="p-2.5 rounded-xl bg-white border border-slate-200/80 shadow-xs text-center">
+            <div class="text-base">♟️</div>
+            <div class="text-[10px] font-extrabold text-slate-700 mt-0.5">Chess Lounge</div>
+          </div>
+          <div class="p-2.5 rounded-xl bg-white border border-slate-200/80 shadow-xs text-center">
+            <div class="text-base">🎯</div>
+            <div class="text-[10px] font-extrabold text-slate-700 mt-0.5">Carrom</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Facility Highlights -->
+      <div class="mt-8 pt-5 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
+        <div>
+          <span class="text-slate-900 font-extrabold text-sm block">24 / 7</span>
+          <span>Floodlit Arena</span>
+        </div>
+        <div>
+          <span class="text-emerald-700 font-extrabold text-sm block">Instant</span>
+          <span>Digital Passes</span>
+        </div>
+        <div>
+          <span class="text-sky-700 font-extrabold text-sm block">6 Sports</span>
+          <span>Pro Standards</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL: Authentication Form -->
+    <div class="md:col-span-7 p-8 lg:p-10 bg-white flex flex-col justify-center">
+      
+      <div class="mb-5">
+        <h2 class="text-2xl font-extrabold text-slate-900">Sign in to your account</h2>
+        <p class="text-xs text-slate-500 mt-1">Select your access mode below to manage your reservations.</p>
+      </div>
+
+      <!-- ROLE TABS -->
+      <div class="flex bg-slate-100 p-1.5 rounded-2xl border border-slate-200 mb-6">
+        <button id="tab-btn-player" type="button" onclick="switchLoginRole('player')" class="flex-1 py-2 text-xs font-bold rounded-xl transition-all flex items-center justify-center space-x-2 bg-emerald-600 text-white shadow-sm cursor-pointer">
+          <i data-lucide="user" class="w-4 h-4"></i>
+          <span>Player Hub</span>
+        </button>
+        <button id="tab-btn-admin" type="button" onclick="switchLoginRole('admin')" class="flex-1 py-2 text-xs font-bold rounded-xl transition-all flex items-center justify-center space-x-2 text-slate-600 hover:text-slate-900 cursor-pointer">
+          <i data-lucide="shield-check" class="w-4 h-4"></i>
+          <span>Arena Manager</span>
+        </button>
+      </div>
+
+      <!-- PLAYER LOGIN FORM -->
+      <form id="form-player" onsubmit="event.preventDefault(); handlePlayerLogin(event);" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">Player / Team Name</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
+              <i data-lucide="user" class="w-4 h-4"></i>
+            </span>
+            <input type="text" id="player-username" required placeholder="Enter player or team name" class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-emerald-500 focus:bg-white transition-colors">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">WhatsApp / Mobile Number</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
+              <i data-lucide="phone" class="w-4 h-4"></i>
+            </span>
+            <input type="tel" id="player-phone" required placeholder="10-digit mobile number" class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-emerald-500 focus:bg-white transition-colors">
+          </div>
+        </div>
+
+        <button type="submit" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 active:scale-[0.99] text-white font-extrabold rounded-xl text-sm transition-all shadow-md shadow-emerald-600/20 flex items-center justify-center space-x-2 cursor-pointer mt-1">
+          <span>Enter Player Hub</span>
+          <i data-lucide="arrow-right" class="w-4 h-4 stroke-[2.5]"></i>
+        </button>
+
+        <button type="button" onclick="fillPlayerDemo()" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 rounded-xl text-xs font-semibold transition-all flex items-center justify-center space-x-1.5 cursor-pointer">
+          <i data-lucide="zap" class="w-3.5 h-3.5 text-amber-500"></i>
+          <span>Auto-fill Player Demo</span>
+        </button>
+      </form>
+
+      <!-- ADMIN LOGIN FORM -->
+      <form id="form-admin" onsubmit="event.preventDefault(); handleAdminLogin(event);" class="space-y-4 hidden">
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">Manager ID</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
+              <i data-lucide="shield" class="w-4 h-4"></i>
+            </span>
+            <input type="text" id="admin-id" required placeholder="arena.manager@elite.com" class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-emerald-500 focus:bg-white transition-colors">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">Passcode</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
+              <i data-lucide="key-round" class="w-4 h-4"></i>
+            </span>
+            <input type="password" id="admin-passcode" required placeholder="Passcode (admin123)" class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-emerald-500 focus:bg-white transition-colors">
+          </div>
+        </div>
+
+        <button type="submit" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 active:scale-[0.99] text-white font-extrabold rounded-xl text-sm transition-all shadow-md shadow-emerald-600/20 flex items-center justify-center space-x-2 cursor-pointer mt-1">
+          <span>View Admin Booking Ledger</span>
+          <i data-lucide="layout-dashboard" class="w-4 h-4 stroke-[2.5]"></i>
+        </button>
+
+        <button type="button" onclick="fillAdminDemo()" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 rounded-xl text-xs font-semibold transition-all flex items-center justify-center space-x-1.5 cursor-pointer">
+          <i data-lucide="zap" class="w-3.5 h-3.5 text-amber-500"></i>
+          <span>Auto-fill Admin Pass (admin123)</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 2. ADMIN BOOKING DASHBOARD                 -->
+  <!-- ========================================== -->
+  <div id="admin-ledger-view" class="w-full max-w-5xl hidden space-y-6 z-10 py-6">
+    <div class="bg-white border border-slate-200 p-5 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-4 shadow-sm">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 border border-emerald-200 flex items-center justify-center text-emerald-700 font-bold">
+          <i data-lucide="shield-check" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <h2 class="text-xl font-bold text-slate-900">Arena Operations & Bookings Manager</h2>
+          <p class="text-xs text-slate-500">Central real-time ledger for all 6 disciplines</p>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-2">
+        <a href="index.html" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl transition-all flex items-center space-x-1 shadow-sm">
+          <span>Go to Master Hub</span>
+          <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+        </a>
+        <button type="button" onclick="logoutAdmin()" class="px-3.5 py-2 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 font-bold text-xs rounded-xl cursor-pointer">
+          Lock / Logout
+        </button>
+      </div>
+    </div>
+
+    <!-- KPI Summary Row -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="bg-white border border-slate-200 p-4 rounded-2xl shadow-xs">
+        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Total Bookings</span>
+        <div id="stat-total" class="text-2xl font-extrabold text-slate-900 mt-1">0</div>
+      </div>
+      <div class="bg-white border border-slate-200 p-4 rounded-2xl shadow-xs">
+        <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider">Confirmed Slots</span>
+        <div id="stat-confirmed" class="text-2xl font-extrabold text-emerald-700 mt-1">0</div>
+      </div>
+      <div class="bg-white border border-slate-200 p-4 rounded-2xl shadow-xs">
+        <span class="text-xs font-bold text-amber-700 uppercase tracking-wider">Pending Approval</span>
+        <div id="stat-pending" class="text-2xl font-extrabold text-amber-700 mt-1">0</div>
+      </div>
+      <div class="bg-white border border-slate-200 p-4 rounded-2xl shadow-xs">
+        <span class="text-xs font-bold text-teal-700 uppercase tracking-wider">Gross Revenue</span>
+        <div id="stat-revenue" class="text-2xl font-extrabold text-teal-700 mt-1">₹0</div>
+      </div>
+    </div>
+
+    <!-- Filter & Search Controls -->
+    <div class="bg-white border border-slate-200 p-4 rounded-2xl flex flex-col sm:flex-row justify-between items-center gap-3 shadow-xs">
+      <div class="flex items-center space-x-2 w-full sm:w-auto">
+        <input type="text" id="admin-search" oninput="renderAdminBookings()" placeholder="Search player, ID, or sport..." class="bg-slate-50 border border-slate-200 text-xs text-slate-900 rounded-xl px-3.5 py-2 w-full sm:w-64 focus:outline-none focus:border-emerald-500">
+        <select id="admin-filter-sport" onchange="renderAdminBookings()" class="bg-slate-50 border border-slate-200 text-xs text-slate-700 rounded-xl px-3 py-2 focus:outline-none">
+          <option value="ALL">All Sports</option>
+          <option value="Cricket">Cricket</option>
+          <option value="Football Turf">Football Turf</option>
+          <option value="Badminton">Badminton</option>
+          <option value="Swimming">Swimming</option>
+          <option value="Chess">Chess</option>
+          <option value="Carrom">Carrom</option>
+        </select>
+      </div>
+
+      <button type="button" onclick="resetDemoData()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 px-3 py-2 rounded-xl font-medium cursor-pointer">
+        Reset Demo Data
+      </button>
+    </div>
+
+    <!-- Bookings Table -->
+    <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xs">
+      <div class="overflow-x-auto">
+        <table class="w-full text-xs text-left text-slate-700">
+          <thead class="bg-slate-50 text-slate-600 uppercase font-bold border-b border-slate-200">
+            <tr>
+              <th class="p-3.5">Ref ID</th>
+              <th class="p-3.5">Player / Team</th>
+              <th class="p-3.5">Sport & Pitch</th>
+              <th class="p-3.5">Date & Slot</th>
+              <th class="p-3.5">Amount</th>
+              <th class="p-3.5">Status</th>
+              <th class="p-3.5 text-center">Admin Actions</th>
+            </tr>
+          </thead>
+          <tbody id="admin-ledger-tbody" class="divide-y divide-slate-100"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const AUTH_KEY = "elite_auth_session";
+    const STORAGE_KEY = "elite_arena_unified_db";
+
+    function getBookings() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) return JSON.parse(saved);
+      const today = new Date().toISOString().split("T")[0];
+      const initialSeed = [
+        { id: "CRK-4011", sport: "Cricket", player: "Upendra", court: "Cage Pitch A (Bowling Machine)", date: today, slot: "04:00 PM - 05:00 PM", amount: 1700, status: "Confirmed" },
+        { id: "FTB-8022", sport: "Football Turf", player: "Vikram FC", court: "FIFA Turf 1 (7v7 Pitch)", date: today, slot: "06:00 PM - 07:00 PM", amount: 1650, status: "Confirmed" },
+        { id: "BAD-3091", sport: "Badminton", player: "Sarah Jenkins", court: "Court 2 (BWF Synthetic Mat)", date: today, slot: "07:00 AM - 08:00 AM", amount: 600, status: "Confirmed" },
+        { id: "SWM-1054", sport: "Swimming", player: "Rahul Verma", court: "Lane 1 (Speed Lap)", date: today, slot: "06:00 AM - 07:00 AM", amount: 450, status: "Pending" },
+        { id: "CHS-9021", sport: "Chess", player: "Karthik R", court: "Table 1 (DGT Electronic Sensor)", date: today, slot: "02:00 PM - 03:00 PM", amount: 250, status: "Confirmed" },
+        { id: "CAR-5042", sport: "Carrom", player: "Anand M", court: "Synco Champion Board 1", date: today, slot: "05:00 PM - 06:00 PM", amount: 200, status: "Pending" }
+      ];
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(initialSeed));
+      return initialSeed;
+    }
+
+    function saveBookings(d) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(d));
+    }
+
+    function switchLoginRole(role) {
+      const playerBtn = document.getElementById("tab-btn-player");
+      const adminBtn = document.getElementById("tab-btn-admin");
+      const playerForm = document.getElementById("form-player");
+      const adminForm = document.getElementById("form-admin");
+
+      if (role === 'player') {
+        playerBtn.className = "flex-1 py-2 text-xs font-bold rounded-xl transition-all flex items-center justify-center space-x-2 bg-emerald-600 text-white shadow-sm cursor-pointer";
+        adminBtn.className = "flex-1 py-2 text-xs font-bold rounded-xl transition-all flex items-center justify-center space-x-2 text-slate-600 hover:text-slate-900 cursor-pointer";
+        playerForm.classList.remove("hidden");
+        adminForm.classList.add("hidden");
+      } else {
+        adminBtn.className = "flex-1 py-2 text-xs font-bold rounded-xl transition-all flex items-center justify-center space-x-2 bg-emerald-600 text-white shadow-sm cursor-pointer";
+        playerBtn.className = "flex-1 py-2 text-xs font-bold rounded-xl transition-all flex items-center justify-center space-x-2 text-slate-600 hover:text-slate-900 cursor-pointer";
+        adminForm.classList.remove("hidden");
+        playerForm.classList.add("hidden");
+      }
+    }
+
+    function fillPlayerDemo() {
+      document.getElementById("player-username").value = "Upendra";
+      document.getElementById("player-phone").value = "9876543210";
+    }
+
+    function fillAdminDemo() {
+      document.getElementById("admin-id").value = "arena.manager@elite.com";
+      document.getElementById("admin-passcode").value = "admin123";
+    }
+
+    function handlePlayerLogin(e) {
+      if (e) e.preventDefault();
+      const name = document.getElementById("player-username").value.trim();
+      const phone = document.getElementById("player-phone").value.trim();
+
+      if (!name) {
+        alert("Please enter a player or team name!");
+        return false;
+      }
+
+      const playerSession = {
+        role: "PLAYER",
+        name: name,
+        phone: phone || "9876543210",
+        timestamp: new Date().toISOString()
+      };
+
+      localStorage.setItem(AUTH_KEY, JSON.stringify(playerSession));
+      window.location.replace("index.html");
+      return false;
+    }
+
+    function handleAdminLogin(e) {
+      if (e) e.preventDefault();
+      const pass = document.getElementById("admin-passcode").value.trim();
+      if (pass === "admin123") {
+        localStorage.setItem(AUTH_KEY, JSON.stringify({ role: "ADMIN", name: "Arena Manager" }));
+        showAdminLedger();
+      } else {
+        alert("Invalid passcode! Use: admin123");
+      }
+      return false;
+    }
+
+    function showAdminLedger() {
+      document.getElementById("login-container").classList.add("hidden");
+      document.getElementById("admin-ledger-view").classList.remove("hidden");
+      renderAdminBookings();
+    }
+
+    function logoutAdmin() {
+      localStorage.removeItem(AUTH_KEY);
+      document.getElementById("login-container").classList.remove("hidden");
+      document.getElementById("admin-ledger-view").classList.add("hidden");
+      switchLoginRole('admin');
+    }
+
+    function renderAdminBookings() {
+      const query = (document.getElementById("admin-search")?.value || "").toLowerCase();
+      const sportFilter = document.getElementById("admin-filter-sport")?.value || "ALL";
+      let list = getBookings();
+
+      const total = list.length;
+      const confirmed = list.filter(b => b.status === "Confirmed").length;
+      const pending = list.filter(b => b.status === "Pending").length;
+      const rev = list.filter(b => b.status === "Confirmed").reduce((sum, b) => sum + (Number(b.amount) || 0), 0);
+
+      document.getElementById("stat-total").innerText = total;
+      document.getElementById("stat-confirmed").innerText = confirmed;
+      document.getElementById("stat-pending").innerText = pending;
+      document.getElementById("stat-revenue").innerText = `₹${rev.toLocaleString('en-IN')}`;
+
+      if (sportFilter !== "ALL") list = list.filter(b => b.sport === sportFilter);
+      if (query) {
+        list = list.filter(b => b.player.toLowerCase().includes(query) || b.id.toLowerCase().includes(query) || b.sport.toLowerCase().includes(query));
+      }
+
+      const tbody = document.getElementById("admin-ledger-tbody");
+      if (list.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" class="text-center py-6 text-slate-400">No matching booking records found.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = list.map(b => `
+        <tr class="hover:bg-slate-50 transition-colors">
+          <td class="p-3.5 font-mono font-bold text-emerald-700">${b.id}</td>
+          <td class="p-3.5 font-bold text-slate-900">${b.player}</td>
+          <td class="p-3.5">
+            <span class="font-semibold text-slate-800">${b.sport}</span>
+            <div class="text-[10px] text-slate-500">${b.court}</div>
+          </td>
+          <td class="p-3.5">
+            <div class="font-medium text-slate-800">${b.date}</div>
+            <div class="text-[10px] text-slate-500">${b.slot}</div>
+          </td>
+          <td class="p-3.5 font-bold text-slate-900">₹${b.amount}</td>
+          <td class="p-3.5"><span class="px-2 py-0.5 rounded text-[10px] font-bold badge-${b.status}">${b.status}</span></td>
+          <td class="p-3.5 text-center">
+            <div class="inline-flex space-x-1.5">
+              <button type="button" onclick="updateBookingStatus('${b.id}', 'Confirmed')" class="px-2.5 py-1 bg-emerald-100 hover:bg-emerald-200 text-emerald-800 rounded text-[11px] font-bold cursor-pointer">Approve</button>
+              <button type="button" onclick="updateBookingStatus('${b.id}', 'Cancelled')" class="px-2.5 py-1 bg-rose-100 hover:bg-rose-200 text-rose-800 rounded text-[11px] font-bold cursor-pointer">Cancel</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function updateBookingStatus(id, newStatus) {
+      const data = getBookings();
+      const item = data.find(b => b.id === id);
+      if (item) {
+        item.status = newStatus;
+        saveBookings(data);
+        renderAdminBookings();
+      }
+    }
+
+    function resetDemoData() {
+      if (confirm("Reset bookings back to factory demo state?")) {
+        localStorage.removeItem(STORAGE_KEY);
+        getBookings();
+        renderAdminBookings();
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      getBookings();
+      const session = JSON.parse(localStorage.getItem(AUTH_KEY) || "null");
+      if (session && session.role === "ADMIN") showAdminLedger();
+      if (window.lucide) lucide.createIcons();
+    });
+  </script>
+</body>
+</html>

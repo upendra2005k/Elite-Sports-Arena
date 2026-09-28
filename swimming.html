@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Elite Arena - Swimming Pool</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .swimming-banner {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.88) 0%, rgba(15, 23, 42, 0.6) 50%, rgba(2, 132, 199, 0.45) 100%),
+                  url('https://images.pexels.com/photos/863988/pexels-photo-863988.jpeg?auto=compress&cs=tinysrgb&w=1200') center/cover no-repeat;
+      min-height: 180px;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col p-6">
+  <div class="max-w-5xl mx-auto w-full">
+    
+    <!-- Hero Banner Header -->
+    <div class="swimming-banner rounded-3xl p-6 sm:p-8 flex flex-col justify-between mb-6 shadow-lg border border-slate-200 text-white relative overflow-hidden">
+      <div class="flex justify-between items-start">
+        <a href="index.html" class="inline-flex items-center space-x-1.5 text-xs font-bold text-sky-400 hover:text-sky-300 bg-slate-900/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-sky-500/30 transition-all">
+          <span>← All Sports Arenas</span>
+        </a>
+
+        <div class="flex items-center space-x-2">
+          <button onclick="setTab('client')" id="btn-client" class="bg-blue-600 text-white font-bold px-4 py-2 rounded-xl text-xs shadow-md">Swimmer Mode</button>
+          <button onclick="setTab('admin')" id="btn-admin" class="bg-white/20 backdrop-blur-md text-white hover:bg-white/30 px-4 py-2 rounded-xl text-xs font-bold transition-all">Admin Console</button>
+          <a href="login.html" onclick="localStorage.removeItem('elite_auth_session')" class="text-xs text-rose-300 hover:text-rose-200 font-semibold pl-2">Logout</a>
+        </div>
+      </div>
+
+      <div class="mt-8">
+        <span class="text-[11px] font-extrabold uppercase tracking-wider text-sky-300 bg-sky-950/60 border border-sky-500/30 px-2.5 py-0.5 rounded-full">Olympic 50M Lanes</span>
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-white mt-1.5 drop-shadow-sm">🏊 Olympic Swimming Pool Booking</h1>
+        <p class="text-xs text-slate-200 mt-1">Olympic standard 8-lane temperature controlled pool with coaches.</p>
+      </div>
+    </div>
+
+    <!-- CLIENT VIEW -->
+    <div id="view-client" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="md:col-span-2 bg-white border border-slate-200 p-6 rounded-2xl shadow-sm space-y-4">
+        <h2 class="font-bold text-lg text-slate-900">Reserve Swim Lane & Session</h2>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="text-xs font-bold text-slate-600 uppercase">Swimmer Name</label>
+            <input type="text" id="player-name" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-sm mt-1 text-slate-800" readonly>
+          </div>
+          <div>
+            <label class="text-xs font-bold text-slate-600 uppercase">Lane Selection</label>
+            <select id="court-name" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-sm mt-1 text-slate-800">
+              <option value="Lane 1 (Speed Lap)">Lane 1 (Speed Lap)</option>
+              <option value="Lane 2 (General Freestyle)">Lane 2 (General Freestyle)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="text-xs font-bold text-slate-600 uppercase">Date</label>
+            <input type="date" id="booking-date" onchange="renderSlots()" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-sm mt-1 text-slate-800">
+          </div>
+          <div>
+            <label class="text-xs font-bold text-slate-600 uppercase">Pool Kit Hire</label>
+            <select id="addon-option" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-sm mt-1 text-slate-800">
+              <option value="0">No Addons (₹0)</option>
+              <option value="100">Speedo Goggles & Cap (₹100)</option>
+              <option value="300">Personal Swim Coach (45 mins) (₹300)</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="text-xs font-bold text-slate-600 uppercase block mb-2">Available Swim Sessions</label>
+          <div id="slots-grid" class="grid grid-cols-3 gap-2"></div>
+        </div>
+
+        <button onclick="bookSlot()" class="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-sm shadow-md transition-all">
+          Confirm Swim Pass (₹350/hr + Addons)
+        </button>
+      </div>
+
+      <div class="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm">
+        <h3 class="font-bold text-slate-900 text-sm uppercase">My Pool Passes</h3>
+        <div id="my-bookings" class="mt-4 space-y-3"></div>
+      </div>
+    </div>
+
+    <!-- ADMIN VIEW -->
+    <div id="view-admin" class="hidden bg-white border border-slate-200 p-6 rounded-2xl shadow-sm space-y-4">
+      <div class="flex justify-between items-center">
+        <h2 class="font-bold text-xl text-slate-900">🏊 Pool Deck Manager</h2>
+        <button onclick="clearDemo()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1 rounded border border-slate-200">Reset Data</button>
+      </div>
+      <table class="w-full text-xs text-left text-slate-700">
+        <thead class="bg-slate-50 text-slate-600 uppercase font-bold border-b border-slate-200">
+          <tr>
+            <th class="p-3">ID</th>
+            <th class="p-3">Swimmer</th>
+            <th class="p-3">Lane</th>
+            <th class="p-3">Date & Slot</th>
+            <th class="p-3">Status</th>
+            <th class="p-3">Action</th>
+          </tr>
+        </thead>
+        <tbody id="admin-table" class="divide-y divide-slate-100"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const SPORT_NAME = "Swimming";
+    const BASE_PRICE = 350;
+    const STORAGE_KEY = "elite_arena_unified_db";
+    const AUTH_KEY = "elite_auth_session";
+    const SLOTS = ["06:00 AM - 07:00 AM","07:00 AM - 08:00 AM","08:00 AM - 09:00 AM","05:00 PM - 06:00 PM","06:00 PM - 07:00 PM"];
+    let selectedSlot = SLOTS[0];
+
+    const session = JSON.parse(localStorage.getItem(AUTH_KEY) || "null");
+    if (!session) window.location.href = "login.html";
+    document.getElementById("player-name").value = session.name;
+
+    function getData() { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); }
+    function saveData(d) { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); }
+
+    function setTab(t) {
+      document.getElementById('view-client').classList.toggle('hidden', t !== 'client');
+      document.getElementById('view-admin').classList.toggle('hidden', t !== 'admin');
+      document.getElementById('btn-client').className = t === 'client' ? 'bg-blue-600 text-white font-bold px-4 py-2 rounded-xl text-xs shadow-md' : 'bg-white/20 backdrop-blur-md text-white hover:bg-white/30 px-4 py-2 rounded-xl text-xs font-bold transition-all';
+      document.getElementById('btn-admin').className = t === 'admin' ? 'bg-blue-600 text-white font-bold px-4 py-2 rounded-xl text-xs shadow-md' : 'bg-white/20 backdrop-blur-md text-white hover:bg-white/30 px-4 py-2 rounded-xl text-xs font-bold transition-all';
+      if(t === 'admin') renderAdmin();
+    }
+
+    function renderSlots() {
+      const date = document.getElementById('booking-date').value;
+      const court = document.getElementById('court-name').value;
+      const booked = getData().filter(b => b.sport === SPORT_NAME && b.date === date && b.court === court && b.status !== 'Cancelled').map(b => b.slot);
+      const grid = document.getElementById('slots-grid');
+      grid.innerHTML = SLOTS.map(s => {
+        const isBooked = booked.includes(s);
+        if(isBooked) return `<button disabled class="p-2 bg-rose-50 border border-rose-200 text-rose-400 text-xs rounded-lg line-through">${s}</button>`;
+        const isSel = s === selectedSlot;
+        return `<button onclick="selectedSlot='${s}';renderSlots();" class="p-2 text-xs rounded-lg border ${isSel ? 'bg-blue-600 text-white font-bold border-blue-600 shadow-sm' : 'bg-white border-slate-200 text-slate-700 hover:border-blue-500'}">${s}</button>`;
+      }).join('');
+    }
+
+    function bookSlot() {
+      const player = document.getElementById('player-name').value.trim();
+      const date = document.getElementById('booking-date').value;
+      const court = document.getElementById('court-name').value;
+      const addon = Number(document.getElementById('addon-option').value);
+      if(!date) return alert("Select date!");
+
+      const data = getData();
+      if(data.some(b => b.sport === SPORT_NAME && b.date === date && b.court === court && b.slot === selectedSlot && b.status !== 'Cancelled')) {
+        return alert("Lane slot already reserved!");
+      }
+
+      data.push({
+        id: "SWM-" + Math.floor(1000 + Math.random()*9000),
+        sport: SPORT_NAME,
+        player, court, date, slot: selectedSlot,
+        amount: BASE_PRICE + addon,
+        status: "Confirmed"
+      });
+      saveData(data);
+      alert("Pool pass generated successfully!");
+      renderSlots();
+      renderClientPasses();
+    }
+
+    function renderClientPasses() {
+      const player = document.getElementById('player-name').value.trim();
+      const list = getData().filter(b => b.sport === SPORT_NAME && b.player.toLowerCase() === player.toLowerCase());
+      document.getElementById('my-bookings').innerHTML = list.length ? list.map(b => `
+        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs">
+          <div class="flex justify-between font-bold text-slate-900"><span>${b.court}</span><span class="text-blue-700">${b.status}</span></div>
+          <div class="text-slate-500 mt-1">${b.date} | ${b.slot}</div>
+          <div class="text-[10px] text-slate-400 mt-1">Ref: ${b.id} • ₹${b.amount}</div>
+        </div>
+      `).join('') : '<p class="text-xs text-slate-400">No pool passes yet.</p>';
+    }
+
+    function renderAdmin() {
+      const rows = getData().filter(b => b.sport === SPORT_NAME);
+      document.getElementById('admin-table').innerHTML = rows.map(b => `
+        <tr class="hover:bg-slate-50">
+          <td class="p-3 font-mono font-bold text-blue-700">${b.id}</td>
+          <td class="p-3 font-bold text-slate-900">${b.player}</td>
+          <td class="p-3">${b.court}</td>
+          <td class="p-3">${b.date} (${b.slot})</td>
+          <td class="p-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold ${b.status==='Confirmed'?'bg-emerald-100 text-emerald-800':'bg-rose-100 text-rose-800'}">${b.status}</span></td>
+          <td class="p-3"><button onclick="cancelBooking('${b.id}')" class="text-rose-600 font-semibold hover:underline">Cancel</button></td>
+        </tr>
+      `).join('');
+    }
+
+    function cancelBooking(id) {
+      const data = getData();
+      const item = data.find(b => b.id === id);
+      if(item) { item.status = 'Cancelled'; saveData(data); renderAdmin(); renderSlots(); renderClientPasses(); }
+    }
+
+    function clearDemo() { localStorage.removeItem(STORAGE_KEY); renderAdmin(); renderSlots(); }
+
+    if(session.role === 'ADMIN') { setTab('admin'); }
+
+    document.getElementById('booking-date').value = new Date().toISOString().split('T')[0];
+    renderSlots();
+    renderClientPasses();
+  </script>
+</body>
+</html>
